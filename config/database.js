@@ -1,4 +1,7 @@
 const mongoose = require("mongoose");
+require("dotenv").config();
+
+mongoose.set("strictQuery", false);
 
 const connectDB = async () => {
   try {
@@ -9,34 +12,32 @@ const connectDB = async () => {
 
     const uri = `mongodb+srv://${username}:${password}@${cluster}/${dbName}?retryWrites=true&w=majority`;
 
-    const conn = await mongoose.connect(uri, {
+    await mongoose.connect(uri, {
       useNewUrlParser: true,
       useUnifiedTopology: true,
       serverSelectionTimeoutMS: 5000,
       socketTimeoutMS: 45000,
+      family: 4, // Use IPv4
+      keepAlive: true,
+      keepAliveInitialDelay: 300000,
     });
 
-    console.log(`MongoDB Connected: ${conn.connection.host}`);
+    mongoose.connection.on("connected", () => {
+      console.log("MongoDB connected successfully");
+    });
 
-    // Handle connection events
     mongoose.connection.on("error", (err) => {
-      console.error("MongoDB error:", err);
+      console.error("MongoDB connection error:", err);
     });
 
     mongoose.connection.on("disconnected", () => {
       console.log("MongoDB disconnected");
     });
 
-    // Handle application termination
-    process.on("SIGINT", async () => {
-      await mongoose.connection.close();
-      process.exit(0);
-    });
-
-    return conn;
+    return mongoose.connection;
   } catch (error) {
     console.error("MongoDB connection error:", error);
-    process.exit(1);
+    throw error;
   }
 };
 

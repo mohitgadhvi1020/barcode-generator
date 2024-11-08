@@ -1,9 +1,10 @@
 services:
   - type: web
-    name: qr-code-manager
+    name: barcode-generator-2
     runtime: node
     buildCommand: npm install
     startCommand: node app.js
+    autoDeploy: true
     envVars:
       - key: NODE_ENV
         value: production
@@ -15,3 +16,7 @@ services:
         sync: false
       - key: MONGO_DB_NAME
         value: qrmanager
+    healthCheckPath: /health
+    scaling:
+      minInstances: 1
+      maxInstances: 1
