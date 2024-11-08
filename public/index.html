@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dynamic QR Code Manager</title>
+    <!-- Required Libraries -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+      rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <!-- Custom CSS & JS -->
+    <link rel="stylesheet" href="/css/style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <div class="header">
+        <h1>QR Code Manager</h1>
+      </div>
+
+      <div class="input-section">
+        <div class="input-group">
+          <label for="qr-name">QR Code Name:</label>
+          <input
+            type="text"
+            id="qr-name"
+            placeholder="Enter name for QR code"
+            required />
+        </div>
+        <div class="input-group">
+          <label for="qr-url">Destination URL:</label>
+          <input
+            type="url"
+            id="qr-url"
+            placeholder="Enter destination URL"
+            required />
+        </div>
+        <button class="generate-btn">
+          <i class="fas fa-plus"></i> Generate QR Code
+        </button>
+        <div class="error"></div>
+        <div class="success"></div>
+      </div>
+
+      <div class="qr-grid">
+        <div class="loading">Loading QR codes...</div>
+      </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="/js/utils.js"></script>
+    <script src="/js/uiManager.js"></script>
+    <script src="/js/qrManager.js"></script>
+    <script src="/js/main.js"></script>
+  </body>
+</html>

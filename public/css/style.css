@@ -1,0 +1,225 @@
+/* Reset and base styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial,
+    sans-serif;
+  line-height: 1.6;
+  background-color: #f5f5f5;
+  color: #333;
+  padding: 20px;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Header styles */
+.header {
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+}
+
+.header h1 {
+  color: #007bff;
+  margin: 0;
+}
+
+/* Input section styles */
+.input-section {
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+}
+
+.input-group {
+  margin-bottom: 15px;
+}
+
+.input-group label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: 500;
+}
+
+input[type="text"],
+input[type="url"] {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 16px;
+}
+
+/* Button styles */
+.btn {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: background-color 0.2s;
+}
+
+.generate-btn {
+  background-color: #007bff;
+  color: white;
+}
+
+.generate-btn:hover {
+  background-color: #0056b3;
+}
+
+.update-btn {
+  background-color: #28a745;
+  color: white;
+}
+
+.delete-btn {
+  background-color: #dc3545;
+  color: white;
+}
+
+.download-btn {
+  background-color: #6c757d;
+  color: white;
+}
+
+/* QR Grid styles */
+.qr-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
+}
+
+.qr-card {
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s;
+}
+
+.qr-card:hover {
+  transform: translateY(-2px);
+}
+
+.qr-name {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 15px;
+  color: #007bff;
+}
+
+.qr-card img {
+  width: 200px;
+  height: 200px;
+  display: block;
+  margin: 0 auto 15px;
+}
+
+.qr-info {
+  margin-bottom: 15px;
+  word-break: break-all;
+}
+
+.qr-info a {
+  color: #007bff;
+  text-decoration: none;
+}
+
+.qr-info a:hover {
+  text-decoration: underline;
+}
+
+.qr-stats {
+  background-color: #f8f9fa;
+  padding: 10px;
+  border-radius: 4px;
+  margin-bottom: 15px;
+  font-size: 14px;
+}
+
+/* Download dropdown styles */
+.download-dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.download-menu {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: white;
+  min-width: 200px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+  z-index: 10;
+}
+
+.download-menu button {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  text-align: left;
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+
+.download-menu button:hover {
+  background-color: #f8f9fa;
+}
+
+/* Message styles */
+.error,
+.success {
+  padding: 10px;
+  border-radius: 4px;
+  margin-top: 10px;
+  display: none;
+}
+
+.error {
+  background-color: #f8d7da;
+  color: #dc3545;
+}
+
+.success {
+  background-color: #d4edda;
+  color: #28a745;
+}
+
+/* Loading state */
+.loading {
+  text-align: center;
+  padding: 20px;
+  color: #6c757d;
+  font-style: italic;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .qr-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .btn {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+}
