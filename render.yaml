@@ -1,0 +1,17 @@
+services:
+  - type: web
+    name: qr-code-manager
+    runtime: node
+    buildCommand: npm install
+    startCommand: node app.js
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: MONGO_USERNAME
+        sync: false
+      - key: MONGO_PASSWORD
+        sync: false
+      - key: MONGO_CLUSTER
+        sync: false
+      - key: MONGO_DB_NAME
+        value: qrmanager
