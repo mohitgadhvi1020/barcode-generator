@@ -1,36 +1,40 @@
-// app.js
+require("dotenv").config();
 const express = require("express");
 const path = require("path");
-const config = require("./config/env");
 const connectDB = require("./config/database");
-const qrRoutes = require("./routes/qrRoutes");
 
 const app = express();
 
-// Connect to MongoDB
-connectDB()
-  .then(() => {
-    console.log("Database connected successfully");
-  })
-  .catch((err) => {
-    console.error("Database connection error:", err);
+// Security middleware for production
+if (process.env.NODE_ENV === "production") {
+  app.use((req, res, next) => {
+    if (req.header("x-forwarded-proto") !== "https") {
+      res.redirect(`https://${req.header("host")}${req.url}`);
+    } else {
+      next();
+    }
   });
+}
+
+// Connect to MongoDB
+connectDB();
 
 // Middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-
-// Routes - API routes first
-app.use("/", qrRoutes);
-
-// Static files
 app.use(express.static(path.join(__dirname, "public")));
 
-// Serve dashboard
-app.get("/", (req, res) => {
-  res.sendFile(path.join(__dirname, "public", "index.html"));
+// Routes
+app.use("/", require("./routes/qrRoutes"));
+
+// Error handling
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.status(500).send("Something broke!");
 });
 
-app.listen(config.PORT, () => {
-  console.log(`Server running on port ${config.PORT}`);
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
+  console.log(`Environment: ${process.env.NODE_ENV}`);
 });
